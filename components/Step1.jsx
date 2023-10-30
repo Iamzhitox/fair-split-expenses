@@ -257,7 +257,7 @@ const Step1 = () => {
 							<div className="col-span-6">
 								<ul className="flex gap-2 flex-wrap">
 									{formData.taxes.map((tx) => (
-										<li className="flex gap-3 mb-1 mt-3 bg-indigo-100 px-3 py-2 items-center rounded-2xl">
+										<li key={tx.id} className="flex gap-3 mb-1 mt-3 bg-indigo-100 px-3 py-2 items-center rounded-2xl">
 											<span className="text-xs ">
 												{tx.name}
 											</span>

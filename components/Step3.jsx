@@ -23,7 +23,7 @@ const Step3 = () => {
         <h4 className="mt-8 -mb-2 ml-1 p-0">Lo que debe aportar cada uno</h4>
         {contributors.map( cbt => {
             return (
-                <div className={`flex bg-${colors[cbt.color]}-200 justify-between p-4 rounded-lg  my-4`}>
+                <div key={cbt.id} className={`flex bg-${colors[cbt.color]}-200 justify-between p-4 rounded-lg  my-4`}>
                     <div className="flex flex-col gap-1">
                         <span className="text-sm font-bold">
                             {cbt.fullname}
