@@ -16,6 +16,10 @@ const Contributors = ({setFormData, setEditing}) => {
     return <div className="w-full">
         <h4 className="mt-8 -mb-2 ml-1 p-0">Aportantes</h4>
         {contributors.map( cbt => {
+            
+            const percentTaxes = cbt.taxes.map( c => c.percent).reduce((prev, cur) => prev + cur, 0)
+            const newSalary = cbt.taxes.length > 0 ? cbt.salary * (1 - (percentTaxes / 100)) : cbt.salary
+                
             return (
                 <div key={cbt.id} className={`flex bg-${colors[cbt.color]}-200 justify-between p-4 rounded-lg  my-4`}>
                     <div className="flex flex-col gap-1">
@@ -23,7 +27,7 @@ const Contributors = ({setFormData, setEditing}) => {
                             {cbt.fullname}
                         </span>
                         <span className="text-sm font-light ">
-                            {cbt.salary.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' }) }
+                            {newSalary.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' }) }
                         </span>
                     </div>
                     <div className="flex gap-3">
