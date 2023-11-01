@@ -122,7 +122,7 @@ const Step1 = () => {
             salaryType: "neto",
             salary: 0,
             taxes: [],
-            color: "pink",
+            color: "red",
             id: Date.now()
         });
 	};

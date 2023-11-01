@@ -40,7 +40,7 @@ const Step3 = () => {
                     </div>
                     <div className={`flex flex-col justify-center items-end pl-2`}>
                         <span className={`text-2xl`}>{Number.isInteger(percentOfTotal) ? percentOfTotal : percentOfTotal.toFixed(2)}%</span>
-                        <span className={`text-[10px] font-light pr-1 -mt-1 opacity-60`}>del Total</span>
+                        <span className={`text-[10px] font-light pr-1 -mt-1 opacity-80`}>del Total</span>
                     </div>
                 </div>
             )
