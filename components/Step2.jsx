@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NavButtons from "./NavButtons";
 import useDataStore from "@/store/Data";
 
@@ -23,7 +23,7 @@ const Step2 = () => {
 							</span>
 							<input
 								type="number"
-								className="focus:outline-none pl-0 pr-4 py-1 bg-transparent"
+								className={`focus:outline-none pl-0 pr-4 py-1 bg-transparent`}
 								placeholder="100.000,00"
 								name="budget"
 								onChange={(e) =>

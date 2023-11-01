@@ -11,25 +11,25 @@ const Step1 = () => {
 	const { contributors, addContributor, editContributor } = useDataStore();
 	const colors = [
 		{
-			name: "pink",
+			name: "red",
 			code: "bg-red-200",
 			actived:
 				"bg-red-300 shadow-lg shadow-red-500 border border-red-400 -translate-y-2 transition duration-200",
 		},
 		{
-			name: "yellow",
+			name: "amber",
 			code: "bg-amber-200",
 			actived:
 				"bg-amber-300 shadow-lg shadow-amber-500 border border-amber-400 -translate-y-2 transition duration-200",
 		},
 		{
-			name: "green",
+			name: "emerald",
 			code: "bg-emerald-200",
 			actived:
 				"bg-emerald-300 shadow-lg shadow-emerald-500 border border-emerald-400 -translate-y-2 transition duration-200",
 		},
 		{
-			name: "blue",
+			name: "sky",
 			code: "bg-sky-200",
 			actived:
 				"bg-sky-300 shadow-lg shadow-sky-500 border border-sky-400 -translate-y-2 transition duration-200",
@@ -53,7 +53,7 @@ const Step1 = () => {
 		salaryType: "neto",
 		salary: 0,
 		taxes: [],
-		color: "pink",
+		color: "red",
         id: null
 	});
 
@@ -62,7 +62,20 @@ const Step1 = () => {
     
 	const handleSubmit = (e) => {
 		e.preventDefault();
-        if (formData.fullname === "") {
+        if (formData.fullname === "" && formData.salary <= 0) {
+            toast.error('Hay campos sin rellenar', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            setErrors({salary: true, fullname: true})
+            return
+        } else if (formData.fullname === "") {
             toast.error('Añada un nombre', {
                 position: "top-right",
                 autoClose: 3000,

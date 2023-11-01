@@ -5,14 +5,6 @@ import { BsFillPencilFill, BsXLg } from "react-icons/bs";
 const Contributors = ({setFormData, setEditing}) => {
     const { contributors, deleteContributor } = useDataStore();
     
-    const colors = {
-        pink: "red",
-        yellow: "amber",
-        green: "emerald",
-        blue: "sky",
-        orange: "orange"
-    }
-
     return <div className="w-full">
         <h4 className="mt-8 -mb-2 ml-1 p-0">Aportantes</h4>
         {contributors.map( cbt => {
@@ -21,10 +13,10 @@ const Contributors = ({setFormData, setEditing}) => {
             const newSalary = cbt.taxes.length > 0 ? cbt.salary * (1 - (percentTaxes / 100)) : cbt.salary
                 
             return (
-                <div key={cbt.id} className={`flex bg-${colors[cbt.color]}-200 justify-between p-4 rounded-lg  my-4`}>
+                <div key={cbt.id} className={`flex bg-${cbt.color}-200 justify-between p-4 rounded-lg  my-4`}>
                     <div className="flex flex-col gap-1">
                         <span className="text-sm font-bold">
-                            {cbt.fullname}
+                            {`${cbt.fullname.charAt(0).toUpperCase()}${cbt.fullname.substring(1)}`}
                         </span>
                         <span className="text-sm font-light ">
                             {newSalary.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' }) }
