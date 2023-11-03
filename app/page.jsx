@@ -7,7 +7,7 @@ import useDataStore from "@/store/Data";
 
 const Page = () => {
 
-    const splitsCollection = localStorage.getItem('splitsCollection')
+    const splitsCollection = localStorage.getItem('splitsCollection') ? localStorage.getItem('splitsCollection') : null
     const oldData = splitsCollection ? JSON.parse(splitsCollection) : null
     const { setId, setBudgetAmount, setContributors } = useDataStore();
 
