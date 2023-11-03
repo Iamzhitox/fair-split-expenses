@@ -45,9 +45,6 @@ const Steps = () => {
 					);
 				})}
 			</div>
-			{/* <span className={windowSize <= 1080 ? `text-sm pb-7 ml-3.5 font-light text-indigo-300` : `text-sm pb-7 w-1/3 font-light text-indigo-300 pl-4`}>
-				{subtitle}
-			</span> */}
 		</div>
 	);
 };

@@ -8,6 +8,11 @@ const useDataStore = create((set, get) => ({
 			...state,
 			contributors: [...state.contributors, contributor],
 		})),
+	setContributors: (contributor) =>
+		set((state) => ({
+			...state,
+			contributors: contributor,
+		})),
     deleteContributor: (id) => 
         set((state) => ({
             ...state, 
@@ -27,6 +32,9 @@ const useDataStore = create((set, get) => ({
         }
     )),
     // 
+    id: null,
+    setId: (id) => set((state) => ({...state, id: id})),
+    //
     resetData: () => 
         set((state) => ({
             ...state,
