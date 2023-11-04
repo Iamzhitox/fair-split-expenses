@@ -16,10 +16,10 @@ const Page = () => {
     
 
 	return (
-		<div className="flex flex-col items-center w-full gap-16 min-h-screen">
+		<div className="flex flex-col items-center justify-center w-full gap-16 min-h-screen">
             <Image 
                 src={ferex} 
-                className="w-20 h-20 border-none shadow-lg rounded-2xl mt-32"
+                className="w-20 h-20 border-none shadow-lg rounded-2xl"
                 loading="lazy"
                 alt="icon ferex"
             />

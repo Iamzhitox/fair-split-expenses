@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsFillXCircleFill } from "react-icons/bs";
 import useDataStore from "@/store/Data";
 import Contributors from "./Contributors";
-import { Slide, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Step1 = () => {
 	const { contributors, addContributor, editContributor } = useDataStore();
@@ -54,81 +54,84 @@ const Step1 = () => {
 		salary: 0,
 		taxes: [],
 		color: "red",
-        id: Date.now()
+		id: Date.now(),
 	});
 
-    const [editing, setEditing] = useState(false)
-    const [errors, setErrors] = useState({fullname: false, salary: false})
-    
+	const [editing, setEditing] = useState(false);
+	const [errors, setErrors] = useState({ fullname: false, salary: false });
+
+	const inpFullname = useRef(null);
+	useEffect(() => {
+		inpFullname.current.focus();
+	}, []);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-        if (formData.fullname === "" && formData.salary <= 0) {
-            toast.error('Hay campos sin rellenar', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-            setErrors({salary: true, fullname: true})
-            return
-        } else if (formData.fullname === "") {
-            toast.error('Añada un nombre', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-            setErrors( prev => ({prev, fullname: true}))
-            return
-        } else if (formData.salary <= 0) {
-            toast.error('Sueldo no válido', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-            setErrors( prev => ({prev, salary: true}))
-            return
-        }
-        setErrors({fullname: false, salary: false})
+		if (formData.fullname === "" && formData.salary <= 0) {
+			toast.error("Hay campos sin rellenar", {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
+			setErrors({ salary: true, fullname: true });
+			return;
+		} else if (formData.fullname === "") {
+			toast.error("Añada un nombre", {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
+			setErrors((prev) => ({ prev, fullname: true }));
+			return;
+		} else if (formData.salary <= 0) {
+			toast.error("Sueldo no válido", {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			});
+			setErrors((prev) => ({ prev, salary: true }));
+			return;
+		}
+		setErrors({ fullname: false, salary: false });
 
-        setTax({
-            percent: 0,
+		setTax({
+			percent: 0,
 			name: "",
 			id: 0,
 		});
-        
-        if (editing) {
-            editContributor(formData)
-            setEditing(false)
-        }
-        else 
-            addContributor(formData)
 
-        setFormData({
-            fullname: "",
-            salaryType: "neto",
-            salary: 0,
-            taxes: [],
-            color: "red",
-            id: Date.now()
-        });
+		if (editing) {
+			editContributor(formData);
+			setEditing(false);
+		} else addContributor(formData);
+
+		setFormData({
+			fullname: "",
+			salaryType: "neto",
+			salary: 0,
+			taxes: [],
+			color: "red",
+			id: Date.now(),
+		});
 	};
 
-    const inpError = "rounded-md border-solid border border-red-300" 
-    const inpNoError = "rounded-md border-solid border border-slate-300"
+	const inpError = "rounded-md border-solid border border-red-300";
+	const inpNoError = "rounded-md border-solid border border-slate-300";
 
 	return (
 		<div className="w-full p-4 flex flex-col justify-center mb-20">
@@ -143,7 +146,8 @@ const Step1 = () => {
 					<div className={errors.fullname ? inpError : inpNoError}>
 						<input
 							type="text"
-							className={`focus:outline-none w-full px-3 py-1 bg-transparent `}
+							ref={inpFullname}
+							className={`focus:outline-none w-full px-3 py-2 bg-transparent `}
 							placeholder="Fulano De Tal"
 							name="fullname"
 							onChange={(e) =>
@@ -177,7 +181,7 @@ const Step1 = () => {
 						<span className="ml-1 pl-2 pr-1 text-slate-400">$</span>
 						<input
 							type="number"
-							className="focus:outline-none pl-0 pr-4 py-1 bg-transparent"
+							className="focus:outline-none pl-0 pr-4 py-2 bg-transparent"
 							placeholder="100.000,00"
 							name="salary"
 							onChange={(e) =>
@@ -203,7 +207,7 @@ const Step1 = () => {
 								<div className="grid grid-cols-4 rounded-l-lg border-solid border border-slate-300 ">
 									<input
 										type="number"
-										className="focus:outline-none pr-0 text-end col-span-3 px-0 py-1 bg-transparent"
+										className="focus:outline-none pr-0 text-end col-span-3 px-0 py-2 bg-transparent"
 										placeholder="21"
 										value={
 											tax.percent <= 0 ? "" : tax.percent
@@ -233,7 +237,7 @@ const Step1 = () => {
 								<div className="px-3 rounded-r-lg  border-solid border border-slate-300 ">
 									<input
 										type="text"
-										className="focus:outline-none px-0 max-w-full py-1 bg-transparent"
+										className="focus:outline-none px-0 max-w-full py-2 bg-transparent"
 										placeholder="IVA"
 										name="name"
 										value={tax.name}
@@ -270,7 +274,10 @@ const Step1 = () => {
 							<div className="col-span-6">
 								<ul className="flex gap-2 flex-wrap">
 									{formData.taxes.map((tx) => (
-										<li key={tx.id} className="flex gap-3 mb-1 mt-3 bg-indigo-100 px-3 py-2 items-center rounded-2xl">
+										<li
+											key={tx.id}
+											className="flex gap-3 mb-1 mt-3 bg-indigo-100 px-3 py-2 items-center rounded-2xl"
+										>
 											<span className="text-xs ">
 												{tx.name}
 											</span>
@@ -307,7 +314,7 @@ const Step1 = () => {
 						{colors.map((clr) => {
 							return (
 								<div
-                                    key={clr.name}
+									key={clr.name}
 									className={`w-10 h-10 rounded-full cursor-pointer
                                         ${
 											clr.name === formData.color
@@ -329,23 +336,28 @@ const Step1 = () => {
 					type="submit"
 					className="py-3 text-indigo-900 text-xg px-4 bg-indigo-200 rounded-md"
 				>
-					{ editing ? 'Guardar Cambios' : 'Agregar Sueldo'}
+					{editing ? "Guardar Cambios" : "Agregar Sueldo"}
 				</button>
 			</form>
-            { contributors.length > 0 && <Contributors setFormData={setFormData} setEditing={setEditing}/>}
-            <ToastContainer
-                position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-                transition={Slide}
-            />
+			{contributors.length > 0 && (
+				<Contributors
+					setFormData={setFormData}
+					setEditing={setEditing}
+				/>
+			)}
+			<ToastContainer
+				position="top-right"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+				transition={Slide}
+			/>
 		</div>
 	);
 };

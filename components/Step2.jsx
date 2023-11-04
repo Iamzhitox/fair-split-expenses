@@ -6,13 +6,18 @@ import useDataStore from "@/store/Data";
 const Step2 = () => {
 	const { budgetAmount, setBudgetAmount } = useDataStore();
 
+	const inpBudget = useRef(null);
+	useEffect(() => {
+		inpBudget.current.focus();
+	}, []);
+
 	return (
 		<>
 			<div className="w-full p-4 flex justify-center">
-				<form 
-                    onSubmit={e => e.preventDefault()}
-                    className="flex flex-col gap-6 w-full"
-                >
+				<form
+					onSubmit={(e) => e.preventDefault()}
+					className="flex flex-col gap-6 w-full"
+				>
 					<div className="flex flex-col">
 						<label htmlFor="" className="text-sm font-bold ">
 							Presupuesto / Gastos del mes
@@ -22,8 +27,9 @@ const Step2 = () => {
 								$
 							</span>
 							<input
+								ref={inpBudget}
 								type="number"
-								className={`focus:outline-none pl-0 pr-4 py-1 bg-transparent`}
+								className={`focus:outline-none pl-0 pr-4 py-2 bg-transparent`}
 								placeholder="100.000,00"
 								name="budget"
 								onChange={(e) =>
