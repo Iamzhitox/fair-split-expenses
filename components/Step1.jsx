@@ -54,7 +54,7 @@ const Step1 = () => {
 		salary: 0,
 		taxes: [],
 		color: "red",
-        id: null
+        id: Date.now()
 	});
 
     const [editing, setEditing] = useState(false)
