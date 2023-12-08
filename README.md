@@ -19,4 +19,4 @@
 </ul>
 
 <h2 id="probar">¡Quiero Probarla!</h2>
-<p>Ya podés usarla gratis, entrá a: <a>https://gastosjustos.vercel.app/</a></p>
+<p>Ya podés usarla gratis, entrá a: https://gastosjustos.vercel.app/</p>
